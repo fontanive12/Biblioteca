@@ -1,0 +1,11 @@
+{
+  "name": "projetobiblioteca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "index.js -p "
+  },
+  "author": "",
+  "license": "ISC"
+}
