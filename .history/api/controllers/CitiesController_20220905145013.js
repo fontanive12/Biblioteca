@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
-const CategoryModel = require('../models/City');
+const CityModel = require('../models/City');
 
-class CategoriesController {
+class CitiesController {
 
   index = async (req, res, next) => {
     const params = req.query;
@@ -12,89 +12,93 @@ class CategoriesController {
     const order = params.order || 'ASC';
     const where = {};
 
-    if (params.description) {
-      where.description = {
-        [Op.iLike]: `%${params.description}%`
+    if (params.name) {
+      where.name = {
+        [Op.iLike]: `%${params.name}%`
       };
     }
 
-    const categories = await CategoryModel.findAll({
-      where: where
+    const cities = await CityModel.findAll({
+      where: where,
+      limit: limit,
+      offset: offset,
+      order: [ [sort, order] ]
     });
-    res.json(categories);
+    res.json(cities);
   }
 
   create = async (req, res, next) => {
     try {
       const data = await this._validateData(req.body);
-      const category = await CategoryModel.create(data);
-      res.json(category);
+      const city = await CityModel.create(data);
+      res.json(city);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   show = async (req, res, next) => {
-    const category = await CategoryModel.findByPk(req.params.categoryId);
-    res.json(category);
+    const city = await CityModel.findByPk(req.params.cityId);
+    res.json(city);
   }
 
   update = async (req, res, next) => {
     try {
-      const id = req.params.categoryId;
+      const id = req.params.cityId;
       const data = await this._validateData(req.body, id);
-      await CategoryModel.update(data, {
+      await CityModel.update(data, {
         where: {
           id: id
         }
       });
-      res.json(await CategoryModel.findByPk(id));
+      res.json(await CityModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   delete = async (req, res, next) => {
-    await CategoryModel.destroy({
+    await CityModel.destroy({
       where: {
-        id: req.params.categoryId
+        id: req.params.cityId
       }
     });
     res.json({});
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['description'];
-    const category = {};
+    const attributes = ['name', 'states_id'];
+    const city = {};
     for (const attribute of attributes) {
-      if (!data[attribute]) {
+      if (! data[attribute]){
         throw new Error(`The attribute "${attribute}" is required.`);
       }
-      category[attribute] = data[attribute];
+      city[attribute] = data[attribute];
     }
 
-    if (await this._checkIfEmailExists(category.description, id)) {
-      throw new Error(`The category with mail address "${category.description}" already exists.`);
+    if (await this._checkIfNameExists(city.name, id)) {
+      throw new Error(`The city with name "${city.name}" already exists.`);
     }
 
-    return category;
+    return city;
   }
 
-  _checkIfEmailExists = async (description, id) => {
+  _checkIfNameExists = async (name, id) => {
     const where = {
-      description: description
+        name: name
     };
 
     if (id) {
       where.id = { [Op.ne]: id }; // WHERE id != id
     }
 
-    const count = await CategoryModel.count({
+    const count = await CityModel.count({
       where: where
     });
 
     return count > 0;
   }
+
 }
 
-module.exports = new CategoriesController();
+module.exports = new CitiesController();

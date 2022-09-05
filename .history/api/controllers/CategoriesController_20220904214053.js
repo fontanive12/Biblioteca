@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const CategoryModel = require('../models/City');
+const CategoryModel = require('../models/Category');
 
 class CategoriesController {
 

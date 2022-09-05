@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const CategoryModel = require('../models/City');
+const CategoryModel = require('../models/Category');
 
 class CategoriesController {
 
@@ -64,7 +64,7 @@ class CategoriesController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['description'];
+    const attributes = ['name', 'province'];
     const category = {};
     for (const attribute of attributes) {
       if (!data[attribute]) {
@@ -80,7 +80,7 @@ class CategoriesController {
     return category;
   }
 
-  _checkIfEmailExists = async (description, id) => {
+  _checkIfDescriptionExists = async (description, id) => {
     const where = {
       description: description
     };

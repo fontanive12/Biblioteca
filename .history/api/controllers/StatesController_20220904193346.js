@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
-const CategoryModel = require('../models/City');
+const StateModel = require('../models/State');
 
-class CategoriesController {
+class StatesController {
 
   index = async (req, res, next) => {
     const params = req.query;
@@ -12,89 +12,100 @@ class CategoriesController {
     const order = params.order || 'ASC';
     const where = {};
 
-    if (params.description) {
-      where.description = {
-        [Op.iLike]: `%${params.description}%`
+    if (params.name) {
+      where.name = {
+        [Op.iLike]: `%${params.name}%`
       };
     }
 
-    const categories = await CategoryModel.findAll({
-      where: where
+    if (params.province) {
+      where.province = {
+        [Op.iLike]: `%${params.province}%`
+      };
+    }
+
+
+    const states = await StateModel.findAll({
+      where: where,
+      limit: limit,
+      offset: offset,
+      order: [ [sort, order] ]
     });
-    res.json(categories);
+    res.json(states);
   }
 
   create = async (req, res, next) => {
     try {
       const data = await this._validateData(req.body);
-      const category = await CategoryModel.create(data);
-      res.json(category);
+      const user = await StateModel.create(data);
+      res.json(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   show = async (req, res, next) => {
-    const category = await CategoryModel.findByPk(req.params.categoryId);
-    res.json(category);
+    const user = await StateModel.findByPk(req.params.userId);
+    res.json(user);
   }
 
   update = async (req, res, next) => {
     try {
-      const id = req.params.categoryId;
+      const id = req.params.userId;
       const data = await this._validateData(req.body, id);
-      await CategoryModel.update(data, {
+      await StateModel.update(data, {
         where: {
           id: id
         }
       });
-      res.json(await CategoryModel.findByPk(id));
+      res.json(await StateModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   delete = async (req, res, next) => {
-    await CategoryModel.destroy({
+    await StateModel.destroy({
       where: {
-        id: req.params.categoryId
+        id: req.params.userId
       }
     });
     res.json({});
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['description'];
-    const category = {};
+    const attributes = ['name', 'province'];
+    const user = {};
     for (const attribute of attributes) {
-      if (!data[attribute]) {
+      if (! data[attribute]){
         throw new Error(`The attribute "${attribute}" is required.`);
       }
-      category[attribute] = data[attribute];
+      user[attribute] = data[attribute];
     }
 
-    if (await this._checkIfEmailExists(category.description, id)) {
-      throw new Error(`The category with mail address "${category.description}" already exists.`);
+    if (await this._checkIfEmailExists(user.email, id)) {
+      throw new Error(`The user with mail address "${user.email}" already exists.`);
     }
 
-    return category;
+    return user;
   }
 
-  _checkIfEmailExists = async (description, id) => {
+  _checkIfEmailExists = async (email, id) => {
     const where = {
-      description: description
+      email: email
     };
 
     if (id) {
       where.id = { [Op.ne]: id }; // WHERE id != id
     }
 
-    const count = await CategoryModel.count({
+    const count = await StateModel.count({
       where: where
     });
 
     return count > 0;
   }
+
 }
 
-module.exports = new CategoriesController();
+module.exports = new StatesController();

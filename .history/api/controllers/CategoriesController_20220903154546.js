@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const CategoryModel = require('../models/City');
+const CategoryModel = require('../models/Category');
 
 class CategoriesController {
 
@@ -19,7 +19,10 @@ class CategoriesController {
     }
 
     const categories = await CategoryModel.findAll({
-      where: where
+      where: where,
+      limit: limit,
+      offset: offset,
+      order: [ [sort, order] ]
     });
     res.json(categories);
   }
@@ -67,22 +70,22 @@ class CategoriesController {
     const attributes = ['description'];
     const category = {};
     for (const attribute of attributes) {
-      if (!data[attribute]) {
+      if (! data[attribute]){
         throw new Error(`The attribute "${attribute}" is required.`);
       }
       category[attribute] = data[attribute];
     }
 
-    if (await this._checkIfEmailExists(category.description, id)) {
-      throw new Error(`The category with mail address "${category.description}" already exists.`);
+    if (await this._checkIfCategoryExists(category.description, id)) {
+      throw new Error(`The category with description "${category.description}" already exists.`);
     }
 
     return category;
   }
 
-  _checkIfEmailExists = async (description, id) => {
+  _checkIfCategoryExists = async (description, id) => {
     const where = {
-      description: description
+        description: description
     };
 
     if (id) {
@@ -95,6 +98,7 @@ class CategoriesController {
 
     return count > 0;
   }
+
 }
 
 module.exports = new CategoriesController();
