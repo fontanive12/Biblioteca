@@ -1,23 +1,27 @@
 const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
 
-class Category extends Model { };
+class State extends Model { };
 
-Category.init({
+State.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  description: {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  province: {
     type: DataTypes.STRING,
     allowNull: false
   }
 }, {
   sequelize: db,
-  tableName: 'registrationCategories',
-  modelName: 'RegistrationCategories'
+  tableName: 'registrationStates',
+  modelName: 'RegistrationStates'
 });
 
-module.exports = Category;
+module.exports = State;
