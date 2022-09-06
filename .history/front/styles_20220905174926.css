@@ -1,0 +1,36 @@
+.bg-mynav {
+  background-color: #49baef;
+}
+
+body {
+  font-size: 1.25rem;
+  background-color: #f6f8fa;
+}
+
+td {
+  line-height: 3rem;
+}
+
+/* .container {} */
+
+.containerButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  row-gap: 10px;
+  column-gap: 30px;
+
+  /* indiferente: */
+  padding: 16px;
+  height: 500px;
+}
+
+.buttonMenu {
+  background-color: #c6d8f0;
+  height: 150px;
+  width: 300px;
+  border-radius: 16px;
+}

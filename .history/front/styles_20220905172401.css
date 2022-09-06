@@ -1,0 +1,27 @@
+.bg-mynav {
+  background-color: #49baef;
+}
+
+body {
+  font-size: 1.25rem;
+  background-color: #f6f8fa;
+}
+
+td {
+  line-height: 3rem;
+}
+
+.container {
+  margin: 0;
+        padding: 0rem;
+        text-align: center;
+}
+
+.containerButtons {
+}
+
+.buttonMenu {
+  width: 30rem;
+  height: 10rem;
+
+}

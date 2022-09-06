@@ -1,0 +1,63 @@
+.bg-mynav {
+  background-color: #49baef;
+}
+
+body {
+  font-size: 1.25rem;
+  background-color: #f6f8fa;
+}
+
+td {
+  line-height: 3rem;
+}
+
+.containerInitialPage {
+  margin: 0;
+}
+
+.containerButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+
+}
+
+.buttonMenu {
+  background-color: #c6d8f0;
+  height: 300px;
+  width: 700px;
+  border-radius: 16px;
+  font-size: 35px;
+  text-decoration: none;
+  animation: none;
+}
+
+/* .containerLogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  height: 800px;
+} */
+
+/* .lineLogin {
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+} */
+
