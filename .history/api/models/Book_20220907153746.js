@@ -50,8 +50,6 @@ const db = require('../db');
 const Category = require('./Category');
 const Publisher = require('./Publisher');
 
-
-
 class Book extends Model { };
 
 Book.init({
@@ -82,7 +80,6 @@ Book.init({
     tableName: 'books',
     modelName: 'Books'
 });
-
 
 // Book.sync({force:true})
 

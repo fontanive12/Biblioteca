@@ -176,7 +176,7 @@ class BooksController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['title', 'author', 'publication_year', 'pages', 'CategoryId'];
+    const attributes = ['title', 'author', 'publication_year', 'pages', 'categories_id', 'publisher_id'];
     const book = {};
     for (const attribute of attributes) {
       if (! data[attribute]){

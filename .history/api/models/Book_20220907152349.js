@@ -47,10 +47,6 @@
 
 const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
-const Category = require('./Category');
-const Publisher = require('./Publisher');
-
-
 
 class Book extends Model { };
 
@@ -83,10 +79,7 @@ Book.init({
     modelName: 'Books'
 });
 
-
 // Book.sync({force:true})
 
-Category.hasMany(Book);
-Book.belongsTo(Category);
 
 module.exports = Book;

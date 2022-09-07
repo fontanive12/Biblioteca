@@ -202,7 +202,6 @@ const getBook = (id) => {
 }
 
 const bookEdit = () => {
-    const id = document.getElementById("id").value;
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const publication_year = document.getElementById("publication_year").value;

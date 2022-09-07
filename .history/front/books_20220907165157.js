@@ -156,7 +156,7 @@ const loadTable = () => {
                     trHTML += '<td>' + element.author + '</td>';
                     trHTML += '<td>' + element.publication_year + '</td>';
                     trHTML += '<td>' + element.pages + '</td>';
-                    trHTML += '<td>' + element.Category.description + '</td>';
+                    trHTML += '<td>' + element.Category.name + '</td>';
                     // trHTML += '<td>' + element.publisher_id + '</td>';
                     trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showBookEditBox(' + element.id + ')">Edit</button>';
                     trHTML += '<button type="button" class="btn btn-outline-danger" onclick="bookDelete(' + element.id + ')">Del</button></td>';
@@ -202,7 +202,6 @@ const getBook = (id) => {
 }
 
 const bookEdit = () => {
-    const id = document.getElementById("id").value;
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const publication_year = document.getElementById("publication_year").value;
@@ -219,7 +218,7 @@ const bookEdit = () => {
         // publisher_id: publisher_id,
     })
         .then((response) => {
-            Swal.fire(`Book ${response.data.title} updated`);
+            Swal.fire(`Book ${response.data.name} updated`);
             loadTable();
         }, (error) => {
             Swal.fire(`Error to update book: ${error.response.data.error} `)
@@ -234,7 +233,7 @@ const bookDelete = async (id) => {
     const data = book.data;
     axios.delete(`${ENDPOINT}/books/` + id)
         .then((response) => {
-            Swal.fire(`Book ${data.title} deleted`);
+            Swal.fire(`Book ${data.name} deleted`);
             loadTable();
         }, (error) => {
             Swal.fire(`Error to delete book: ${error.response.data.error} `);

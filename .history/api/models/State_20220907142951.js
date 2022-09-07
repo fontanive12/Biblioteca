@@ -1,25 +1,30 @@
 const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
 
-class Category extends Model { };
 
-Category.init({
+class State extends Model { };
+
+State.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  description: {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  province: {
     type: DataTypes.STRING,
     allowNull: false
   }
 }, {
   sequelize: db,
-  tableName: 'categories',
-  modelName: 'Categories'
+  tableName: 'states',
+  modelName: 'States'
 });
 
-// Category.sync({force:true})
+State.sync({force:true})
 
-module.exports = Category;
+module.exports = State;

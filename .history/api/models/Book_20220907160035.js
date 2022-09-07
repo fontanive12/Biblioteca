@@ -84,7 +84,7 @@ Book.init({
 });
 
 
-// Book.sync({force:true})
+Book.sync({force:true})
 
 Category.hasMany(Book);
 Book.belongsTo(Category);

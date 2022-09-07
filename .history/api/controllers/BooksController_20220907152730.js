@@ -121,17 +121,35 @@
 const { Op } = require('sequelize');
 const BookModel = require('../models/Book');
 const CategoryModel = require('../models/Category');
-const db = require('../db');
+const PublisherModel = require('../models/Publisher');
 class BooksController {
 
   index = async (req, res, next) => {
-   
     const books = await BookModel.findAll({
       include: [{
         model: CategoryModel,
         required: false,
         attributes: ['description']
       }]
+
+      // const params = req.query;
+      // const limit = params.limit || 100;
+      // const page = params.page || 1;
+      // const offset = (page - 1) * limit;
+      // const sort = params.sort || 'id';
+      // const order = params.order || 'ASC';
+      // const where = {};
+
+      // if (params.title) {
+      //   where.title = {
+      //     [Op.iLike]: `%${params.title}%`
+      //   };
+      // }
+
+      //   where: where,
+      //   limit: limit,
+      //   offset: offset,
+      //   order: [ [sort, order] ]
     });
     res.json(books);
   }
@@ -176,10 +194,10 @@ class BooksController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['title', 'author', 'publication_year', 'pages', 'CategoryId'];
+    const attributes = ['title', 'author', 'publication_year', 'pages', 'categories_id', 'publisher_id'];
     const book = {};
     for (const attribute of attributes) {
-      if (! data[attribute]){
+      if (!data[attribute]) {
         throw new Error(`The attribute "${attribute}" is required.`);
       }
       book[attribute] = data[attribute];
@@ -201,7 +219,7 @@ class BooksController {
       where.id = { [Op.ne]: id }; // WHERE id != id
     }
 
-    const count = await BookModel .count({
+    const count = await BookModel.count({
       where: where
     });
 

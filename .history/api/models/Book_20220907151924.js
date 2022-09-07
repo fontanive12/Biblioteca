@@ -46,11 +46,8 @@
 // module.exports = Book;
 
 const { DataTypes, Model } = require('sequelize');
+const { FORCE } = require('sequelize/types/index-hints');
 const db = require('../db');
-const Category = require('./Category');
-const Publisher = require('./Publisher');
-
-
 
 class Book extends Model { };
 
@@ -83,10 +80,7 @@ Book.init({
     modelName: 'Books'
 });
 
+Book.sync({force:true})
 
-// Book.sync({force:true})
-
-Category.hasMany(Book);
-Book.belongsTo(Category);
 
 module.exports = Book;

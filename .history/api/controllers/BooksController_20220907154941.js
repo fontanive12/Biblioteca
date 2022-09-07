@@ -120,18 +120,29 @@
 
 const { Op } = require('sequelize');
 const BookModel = require('../models/Book');
-const CategoryModel = require('../models/Category');
-const db = require('../db');
+
 class BooksController {
 
   index = async (req, res, next) => {
-   
+    const params = req.query;
+    const limit = params.limit || 100;
+    const page = params.page || 1;
+    const offset = (page - 1) * limit;
+    const sort = params.sort || 'id';
+    const order = params.order || 'ASC';
+    const where = {};
+
+    if (params.title) {
+      where.title = {
+        [Op.iLike]: `%${params.title}%`
+      };
+    }
+
     const books = await BookModel.findAll({
-      include: [{
-        model: CategoryModel,
-        required: false,
-        attributes: ['description']
-      }]
+      where: where,
+      limit: limit,
+      offset: offset,
+      order: [ [sort, order] ]
     });
     res.json(books);
   }
@@ -176,7 +187,7 @@ class BooksController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['title', 'author', 'publication_year', 'pages', 'CategoryId'];
+    const attributes = ['title', 'author', 'publication_year', 'pages', 'categories_id', 'publisher_id'];
     const book = {};
     for (const attribute of attributes) {
       if (! data[attribute]){

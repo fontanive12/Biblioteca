@@ -50,8 +50,6 @@ const db = require('../db');
 const Category = require('./Category');
 const Publisher = require('./Publisher');
 
-
-
 class Book extends Model { };
 
 Book.init({
@@ -83,10 +81,9 @@ Book.init({
     modelName: 'Books'
 });
 
-
 // Book.sync({force:true})
 
-Category.hasMany(Book);
-Book.belongsTo(Category);
+Category.hasMany(City);
+City.belongsTo(Category);
 
 module.exports = Book;

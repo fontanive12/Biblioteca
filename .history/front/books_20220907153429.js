@@ -141,6 +141,7 @@
 
 // }
 
+
 const ENDPOINT = "http://localhost:3000";
 
 const loadTable = () => {
@@ -202,7 +203,6 @@ const getBook = (id) => {
 }
 
 const bookEdit = () => {
-    const id = document.getElementById("id").value;
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const publication_year = document.getElementById("publication_year").value;
@@ -215,11 +215,11 @@ const bookEdit = () => {
         author: author,
         publication_year: publication_year,
         pages: pages,
-        CategoryId: categories_id,
+        categories_id: categories_id,
         // publisher_id: publisher_id,
     })
         .then((response) => {
-            Swal.fire(`Book ${response.data.title} updated`);
+            Swal.fire(`Book ${response.data.name} updated`);
             loadTable();
         }, (error) => {
             Swal.fire(`Error to update book: ${error.response.data.error} `)
@@ -234,7 +234,7 @@ const bookDelete = async (id) => {
     const data = book.data;
     axios.delete(`${ENDPOINT}/books/` + id)
         .then((response) => {
-            Swal.fire(`Book ${data.title} deleted`);
+            Swal.fire(`Book ${data.name} deleted`);
             loadTable();
         }, (error) => {
             Swal.fire(`Error to delete book: ${error.response.data.error} `);
@@ -251,8 +251,8 @@ const showBookCreateBox = () => {
             '<input id="author" class="swal2-input" placeholder="Author">' + 
             '<input id="publication_year" class="swal2-input" placeholder="Publication year">' + 
             '<input id="pages" class="swal2-input" placeholder="Pages">' + 
-            '<input id="categories_id" class="swal2-input" placeholder="Category">' ,
-            // '<input id="publisher_id" class="swal2-input" placeholder="Publisher">',
+            '<input id="categories_id" class="swal2-input" placeholder="Category">' + 
+            '<input id="publisher_id" class="swal2-input" placeholder="Publisher">',
         focusConfirm: false,
         showCancelButton: true,
         preConfirm: () => {
@@ -272,7 +272,7 @@ const showBookEditBox = async (id) => {
             '<input id="author" class="swal2-input" placeholder="Author" value="' + data.author + '">' + 
             '<input id="publication_year" class="swal2-input" placeholder="Publication year" value="' + data.publication_year + '">' +
             '<input id="pages" class="swal2-input" placeholder="Pages" value="' + data.pages + '">' +
-            '<input id="categories_id" class="swal2-input" placeholder="Categories" value="' + data.CategoryId + '">' ,
+            '<input id="categories_id" class="swal2-input" placeholder="Categories" value="' + data.CategoryId + '">',
             // '<input id="publisher_id" class="swal2-input" placeholder="Publisher" value="' + data.publisher_id + '">',
         focusConfirm: false,
         showCancelButton: true,
