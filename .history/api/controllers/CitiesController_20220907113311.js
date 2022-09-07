@@ -99,30 +99,30 @@ class CitiesController {
 
 
 
-  _validationStates = async (name, id) => {
-    const idCity = req.params.cityId;
-    const data = await this._validateData(req.body, id);
+  // _validationStates = async (name, id) => {
+  //   const idCity = req.params.cityId;
+  //   const data = await this._validateData(req.body, id);
 
-    const where = {
-      name: name,
-      id: id
-    };
+  //   const where = {
+  //     name: name,
+  //     id: id
+  //   };
 
-    let validation = false;
-    for (let i = 0; i < data.length; i++) {
+  //   let validation = false;
+  //   for (let i = 0; i < data.length; i++) {
 
-      if (where.name === data[i].name && where.id === data[i].id) {
-        validation = true;
-      } else {
-        this._validateData();
-      }
-    }
+  //     if (where.name === data[i].name && where.id === data[i].id) {
+  //       validation = true;
+  //     } else {
+  //       this._validateData();
+  //     }
+  //   }
 
-    if (validation === true) {
-    } else {
-      alert('error')
-    }
-  }
+  //   if (validation === true) {
+  //   } else {
+  //     alert('error')
+  //   }
+  // }
 
   _checkIfNameExists = async (name, id) => {
     const where = {

@@ -1,10 +1,18 @@
 const { Op } = require('sequelize');
+const PublisherModel = require('../models/Publisher');
 const CityModel = require('../models/City');
-const StateModel = require('../models/State');
+const db = require('../db');
 
-class StatesController {
+class PublishersController {
 
   index = async (req, res, next) => {
+
+    include: [{
+      model: CityModel,
+      required: false,
+      attributes: ['name']
+    }]
+
     const params = req.query;
     const limit = params.limit || 100;
     const page = params.page || 1;
@@ -19,88 +27,81 @@ class StatesController {
       };
     }
 
-    if (params.province) {
-      where.province = {
-        [Op.iLike]: `%${params.province}%`
-      };
-    }
-
-
-    const states = await StateModel.findAll({
+    const publishers = await PublisherModel.findAll({
       where: where,
       limit: limit,
       offset: offset,
       order: [ [sort, order] ]
     });
-    res.json(states);
+    res.json(publishers);
   }
 
   create = async (req, res, next) => {
     try {
       const data = await this._validateData(req.body);
-      const state = await StateModel.create(data);
-      res.json(state);
+      const publisher = await PublisherModel.create(data);
+      res.json(publisher);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   show = async (req, res, next) => {
-    const state = await StateModel.findByPk(req.params.stateId);
-    res.json(state);
+    const publisher = await PublisherModel.findByPk(req.params.publisherId);
+    res.json(publisher);
   }
 
   update = async (req, res, next) => {
     try {
-      const id = req.params.stateId;
+      const id = req.params.publisherId;
       const data = await this._validateData(req.body, id);
-      await StateModel.update(data, {
+      await PublisherModel.update(data, {
         where: {
           id: id
         }
       });
-      res.json(await StateModel.findByPk(id));
+      res.json(await PublisherModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   delete = async (req, res, next) => {
-    await StateModel.destroy({
+    await PublisherModel.destroy({
       where: {
-        id: req.params.stateId
+        id: req.params.publisherId
       }
     });
     res.json({});
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['name', 'province'];
-    const state = {};
+    const attributes = ['name', 'cityId'];
+    const publisher = {};
     for (const attribute of attributes) {
       if (! data[attribute]){
         throw new Error(`The attribute "${attribute}" is required.`);
       }
-      state[attribute] = data[attribute];
+      publisher[attribute] = data[attribute];
     }
 
-    if (await this._checkIfNameExists(state.name, id)) {
-      throw new Error(`The state with name "${state.name}" already exists.`);
+    if (await this._checkIfNameExists(publisher.name, id)) {
+      throw new Error(`The publisher with name "${publisher.name}" already exists.`);
     }
 
-    return state;
+    return publisher;
   }
 
   _checkIfNameExists = async (name, id) => {
     const where = {
-      name: name
+        name: name
     };
 
     if (id) {
       where.id = { [Op.ne]: id }; // WHERE id != id
     }
 
-    const count = await StateModel.count({
+    const count = await PublisherModel.count({
       where: where
     });
 
@@ -109,4 +110,4 @@ class StatesController {
 
 }
 
-module.exports = new StatesController();
+module.exports = new PublishersController();

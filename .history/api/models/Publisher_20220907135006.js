@@ -24,6 +24,6 @@ Publisher.init({
 City.hasMany(Publisher);
 Publisher.belongsTo(City);
 
-// Publisher.sync({force:true})
+Publisher.sync({force:true})
 
 module.exports = Publisher;

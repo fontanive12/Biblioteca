@@ -1,7 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
 
-
 class State extends Model { };
 
 State.init({
@@ -25,6 +24,6 @@ State.init({
   modelName: 'States'
 });
 
-// State.sync({force:true})
+State.sync({force:true})
 
 module.exports = State;

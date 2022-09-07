@@ -10,8 +10,7 @@ const loadTable = () => {
                     trHTML += '<tr>';
                     trHTML += '<td>' + element.id + '</td>';
                     trHTML += '<td>' + element.name + '</td>';
-                    trHTML += '<td>' + element.State.name + '</td>';
-                    
+                    trHTML += '<td>' + element.State + '</td>';
                     trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showCityEditBox(' + element.id + ')">Edit</button>';
                     trHTML += '<button type="button" class="btn btn-outline-danger" onclick="cityDelete(' + element.id + ')">Del</button></td>';
                     trHTML += "</tr>";
@@ -29,7 +28,7 @@ const cityCreate = () => {
 
     axios.post(`${ENDPOINT}/cities`, {
         name: name,
-        StateId: states_id,
+        states_id: states_id,
     })
         .then((response) => {
             Swal.fire(`City ${response.data.name} created`);
@@ -53,7 +52,7 @@ const cityEdit = () => {
 
     axios.put(`${ENDPOINT}/cities/` + id, {
         name: name,
-        StateId: states_id,
+        states_id: states_id,
     })
         .then((response) => {
             Swal.fire(`City ${response.data.name} updated`);
@@ -102,7 +101,7 @@ const showCityEditBox = async (id) => {
         html:
             '<input id="id" type="hidden" value=' + data.id + '>' +
             '<input id="name" class="swal2-input" placeholder="Name" value="' + data.name + '">' +
-            '<input id="states_id" class="swal2-input" placeholder="states_id" value="' + data.StateId + '">',
+            '<input id="states_id" class="swal2-input" placeholder="states_id" value="' + data.states_id + '">',
         focusConfirm: false,
         showCancelButton: true,
         preConfirm: () => {

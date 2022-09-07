@@ -1,10 +1,13 @@
 const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
-const City = require('./City');
+const State = require('./State');
 
-class Publisher extends Model { };
+const CityModel = require('../models/City');
+const StateModel = require('../models/State');
 
-Publisher.init({
+class City extends Model { };
+
+City.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -17,13 +20,13 @@ Publisher.init({
     }
 }, {
     sequelize: db,
-    tableName: 'publishers',
-    modelName: 'Publishers'
+    tableName: 'cities',
+    modelName: 'Cities'
 });
 
-City.hasMany(Publisher);
-Publisher.belongsTo(City);
+State.hasMany(City);
+City.belongsTo(State);
 
-// Publisher.sync({force:true})
+// City.sync({force:true})
 
-module.exports = Publisher;
+module.exports = City;

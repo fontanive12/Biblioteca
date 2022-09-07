@@ -2,7 +2,6 @@ const { Op } = require('sequelize');
 const CityModel = require('../models/City');
 const StateModel = require('../models/State');
 const db = require('../db');
-const { _checkIfNameExists } = require('./StatesController');
 
 class CitiesController {
 
@@ -99,9 +98,11 @@ class CitiesController {
 
 
 
-  _validationStates = async (name, id) => {
+  validationStates = async (name, id) => {
+
     const idCity = req.params.cityId;
     const data = await this._validateData(req.body, id);
+    const nameCity = data
 
     const where = {
       name: name,
@@ -111,34 +112,33 @@ class CitiesController {
     let validation = false;
     for (let i = 0; i < data.length; i++) {
 
-      if (where.name === data[i].name && where.id === data[i].id) {
+      if (userLogin === data[i].email && passwordLogin === data[i].password) {
         validation = true;
-      } else {
-        this._validateData();
       }
     }
 
     if (validation === true) {
+      window.location.href = "initialPage.html";
     } else {
       alert('error')
     }
   }
 
-  _checkIfNameExists = async (name, id) => {
-    const where = {
-      name: name
-    };
+  // _checkIfNameExists = async (name, id) => {
+  //   const where = {
+  //     name: name
+  //   };
 
-    if (id) {
-      where.id = { [Op.ne]: id }; // WHERE id != id
-    }
+  //   if (id) {
+  //     where.id = { [Op.ne]: id }; // WHERE id != id
+  //   }
 
-    const count = await CityModel.count({
-      where: where
-    });
+  //   const count = await CityModel.count({
+  //     where: where
+  //   });
 
-    return count > 0;
-  }
+  //   return count > 0;
+  // }
 
 }
 

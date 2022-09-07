@@ -77,7 +77,7 @@ class PublishersController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['name', 'CityId'];
+    const attributes = ['name', 'CityId', 'StateId'];
     const publisher = {};
     for (const attribute of attributes) {
       if (! data[attribute]){

@@ -25,6 +25,6 @@ State.init({
   modelName: 'States'
 });
 
-// State.sync({force:true})
+State.sync({force:true})
 
 module.exports = State;

@@ -1,21 +1,17 @@
 const { Op } = require('sequelize');
 const PublisherModel = require('../models/Publisher');
 const CityModel = require('../models/City');
-const StateModel = require('../models/State');
 const db = require('../db');
 
 class PublishersController {
 
   index = async (req, res, next) => {
-    
-    const publishers = await PublisherModel.findAll({
+
     include: [{
       model: CityModel,
       required: false,
       attributes: ['name']
     }]
-  });
-  res.json(publishers);
 
     // const params = req.query;
     // const limit = params.limit || 100;
@@ -31,10 +27,13 @@ class PublishersController {
     //   };
     // }
 
+    // const publishers = await PublisherModel.findAll({
     //   where: where,
     //   limit: limit,
     //   offset: offset,
     //   order: [ [sort, order] ]
+    // });
+    res.json(publishers);
   }
 
   create = async (req, res, next) => {
@@ -77,7 +76,7 @@ class PublishersController {
   }
 
   _validateData = async (data, id) => {
-    const attributes = ['name', 'CityId'];
+    const attributes = ['name', 'CiCyId'];
     const publisher = {};
     for (const attribute of attributes) {
       if (! data[attribute]){

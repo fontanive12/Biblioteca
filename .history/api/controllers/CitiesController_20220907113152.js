@@ -124,21 +124,21 @@ class CitiesController {
     }
   }
 
-  _checkIfNameExists = async (name, id) => {
-    const where = {
-      name: name
-    };
+  // _checkIfNameExists = async (name, id) => {
+  //   const where = {
+  //     name: name
+  //   };
 
-    if (id) {
-      where.id = { [Op.ne]: id }; // WHERE id != id
-    }
+  //   if (id) {
+  //     where.id = { [Op.ne]: id }; // WHERE id != id
+  //   }
 
-    const count = await CityModel.count({
-      where: where
-    });
+  //   const count = await CityModel.count({
+  //     where: where
+  //   });
 
-    return count > 0;
-  }
+  //   return count > 0;
+  // }
 
 }
 

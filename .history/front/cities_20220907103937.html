@@ -18,17 +18,17 @@
 
     <nav class="navbar navbar-dark bg-mynav">
         <div class="container-fluid">
-            <a class="navbar-brand navbar-brand--black" href="#">Publishers CRUD</a>
+            <a class="navbar-brand navbar-brand--black" href="#">Cities CRUD</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight">
-                <h2>Publishers
+                <h2>Cities
             </div>
             <div class="p-2 bd-highlight">
-                <button type="button" class="btn btn-secondary" onclick="showPublisherCreateBox()">Create</button>
+                <button type="button" class="btn btn-secondary" onclick="showCityCreateBox()">Create</button>
             </div>
         </div>
 
@@ -38,8 +38,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">City</th>
-                        <!-- <th scope="col">State</th> -->
+                        <th scope="col">State</th>
+                        <th scope="col">Province</th>
                     </tr>
                 </thead>
                 <tbody id="mytable">
@@ -53,7 +53,7 @@
     <button class="buttonBack"><a href="initialPage.html" class="buttonBack">Back</a></button>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="publishers.js"></script>
+    <script src="cities.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"

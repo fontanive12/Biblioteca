@@ -25,7 +25,7 @@ loadTable();
 
 const cityCreate = () => {
     const name = document.getElementById("name").value;
-    const states_id = document.getElementById("states_id").value;
+    const states_id = document.getElementById("state_id").value;
 
     axios.post(`${ENDPOINT}/cities`, {
         name: name,
