@@ -54,6 +54,7 @@ class UsersController {
   create = async (req, res, next) => {
     try {
       req.body.password = md5(req.body.password);
+      const md5Password = req.body.password
 
       const data = await this._validateData(req.body);
       const user = await UserModel.create(data);

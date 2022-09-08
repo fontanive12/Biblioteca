@@ -10,7 +10,7 @@ const checkTable = () => {
                 const userLogin = input1.value;
 
                 const input2 = document.querySelector("#passwordLogin");
-                let passwordLogin = md5(input2.value);
+                const passwordLogin = input2.value;
 
                 let validation = false;
 

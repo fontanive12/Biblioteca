@@ -1,6 +1,15 @@
 const { Op } = require('sequelize');
-const UserModel = require('../models/User')
-const md5 = require('md5');
+const UserModel = require('../models/User');
+const crypto = require("crypto");
+const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
+
+const DADOS_CRIPTOGRAFAR = {
+  algoritmo : "aes256",
+  segredo : "chaves"
+};
+
+cipher.update(senha);
+cipher.final(DADOS_CRIPTOGRAFAR.tipo);
 
 class UsersController {
 
@@ -51,16 +60,26 @@ class UsersController {
     res.json(users);
   }
 
+
   create = async (req, res, next) => {
     try {
-      req.body.password = md5(req.body.password);
-
       const data = await this._validateData(req.body);
       const user = await UserModel.create(data);
       res.json(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
+  //   const DADOS_CRIPTOGRAFAR = {
+  //     algoritmo: "aes256",
+  //     segredo: "chaves",
+  //     tipo: "hex"
+  //   };
+
+  //   function criptografar(senha) {
+  //     const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
+  //     cipher.update(password);
+  //     return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
+  //   };
   }
 
   show = async (req, res, next) => {

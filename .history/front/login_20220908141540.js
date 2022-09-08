@@ -10,13 +10,13 @@ const checkTable = () => {
                 const userLogin = input1.value;
 
                 const input2 = document.querySelector("#passwordLogin");
-                let passwordLogin = md5(input2.value);
+                const passwordLogin = input2.value;
 
                 let validation = false;
 
                 for (let i = 0; i < data.length; i++) {
 
-                    if (userLogin === data[i].email && passwordLogin === data[i].password) {
+                    if (userLogin === data[i].email && passwordLogin === data[i].req.body.password) {
                         validation = true;
                     }
                 }

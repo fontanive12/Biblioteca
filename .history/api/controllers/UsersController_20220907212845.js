@@ -1,6 +1,5 @@
 const { Op } = require('sequelize');
-const UserModel = require('../models/User')
-const md5 = require('md5');
+const UserModel = require('../models/User');
 
 class UsersController {
 
@@ -32,7 +31,7 @@ class UsersController {
     }
 
     if (params.max_age) {
-      if (!where.age) {
+      if (! where.age) {
         where.age = {};
       }
       where.age[Op.lte] = params.max_age;
@@ -46,15 +45,25 @@ class UsersController {
       where: where,
       limit: limit,
       offset: offset,
-      order: [[sort, order]]
+      order: [ [sort, order] ]
     });
     res.json(users);
   }
 
+  const DADOS_CRIPTOGRAFAR = {
+    algoritmo : "aes256",
+    segredo : "chaves",
+    tipo : "hex"
+};
+
+function criptografar(senha) {
+	const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
+	cipher.update(senha);
+	return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
+};
+
   create = async (req, res, next) => {
     try {
-      req.body.password = md5(req.body.password);
-
       const data = await this._validateData(req.body);
       const user = await UserModel.create(data);
       res.json(user);
@@ -96,7 +105,7 @@ class UsersController {
     const attributes = ['name', 'age', 'sex', 'email', 'password'];
     const user = {};
     for (const attribute of attributes) {
-      if (!data[attribute]) {
+      if (! data[attribute]){
         throw new Error(`The attribute "${attribute}" is required.`);
       }
       user[attribute] = data[attribute];
