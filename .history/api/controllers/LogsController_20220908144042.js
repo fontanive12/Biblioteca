@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const LogModel = require('../models/Log');
+const db = require('../db');
 class LogsController {
 
   index = async (req, res, next) => {
@@ -13,6 +14,12 @@ class LogsController {
         res.status(400).json({ error: error.message });
       }
     }
+
+    show = async (req, res, next) => {
+      const log = await LogModel.findByPk(req.params.logId);
+      res.json(log);
+    }
+
   }
 }
 
