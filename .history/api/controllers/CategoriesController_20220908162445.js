@@ -85,7 +85,7 @@ class CategoriesController {
     }
 
     if (await this._checkIfEmailExists(category.description, id)) {
-      throw new Error(`The category "${category.description}" already exists.`);
+      throw new Error(`The category with mail address "${category.description}" already exists.`);
     }
 
     return category;

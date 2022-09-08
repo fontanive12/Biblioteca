@@ -2,8 +2,6 @@ const { Op } = require('sequelize');
 const BookModel = require('../models/Book');
 const CategoryModel = require('../models/Category');
 const PublisherModel = require('../models/Publisher');
-const LogModel = require('../models/Log')
-const axios = require('axios')
 const db = require('../db');
 class BooksController {
 

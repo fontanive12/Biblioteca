@@ -1,8 +1,7 @@
 const { Op } = require('sequelize');
 const CityModel = require('../models/City');
 const StateModel = require('../models/State');
-const LogModel = require('../models/Log')
-const axios = require('axios')
+
 class StatesController {
 
   index = async (req, res, next) => {

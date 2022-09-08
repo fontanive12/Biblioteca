@@ -1,7 +1,5 @@
 const { Op } = require('sequelize');
 const CategoryModel = require('../models/Category');
-const LogModel = require('../models/Log')
-const axios = require('axios')
 
 class CategoriesController {
 
@@ -85,7 +83,7 @@ class CategoriesController {
     }
 
     if (await this._checkIfEmailExists(category.description, id)) {
-      throw new Error(`The category "${category.description}" already exists.`);
+      throw new Error(`The category with mail address "${category.description}" already exists.`);
     }
 
     return category;

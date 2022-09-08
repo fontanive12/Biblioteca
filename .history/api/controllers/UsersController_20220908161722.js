@@ -86,9 +86,6 @@ class UsersController {
           id: id
         }
       });
-      LogModel.create({
-        description: 'User updated.',
-      });
       res.json(await UserModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -100,9 +97,6 @@ class UsersController {
       where: {
         id: req.params.userId
       }
-    });
-    LogModel.create({
-      description: 'User deleted.',
     });
     res.json({});
   }

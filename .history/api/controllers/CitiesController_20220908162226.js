@@ -1,8 +1,6 @@
 const { Op } = require('sequelize');
 const CityModel = require('../models/City');
 const StateModel = require('../models/State');
-const LogModel = require('../models/Log')
-const axios = require('axios')
 const db = require('../db');
 const { _checkIfNameExists } = require('./StatesController');
 

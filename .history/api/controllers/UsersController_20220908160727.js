@@ -61,10 +61,10 @@ class UsersController {
 
       const data = await this._validateData(req.body);
       const user = await UserModel.create(data);
-
-      LogModel.create({
+      // let create = new create(LogModel.description('User created.'));
+      await axios.post(`${ENDPOINT}/logs`, {
         description: 'User created.',
-      });
+      })
 
       res.json(user);
     } catch (error) {
@@ -86,9 +86,6 @@ class UsersController {
           id: id
         }
       });
-      LogModel.create({
-        description: 'User updated.',
-      });
       res.json(await UserModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -100,9 +97,6 @@ class UsersController {
       where: {
         id: req.params.userId
       }
-    });
-    LogModel.create({
-      description: 'User deleted.',
     });
     res.json({});
   }
