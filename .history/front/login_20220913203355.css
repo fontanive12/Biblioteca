@@ -1,0 +1,133 @@
+/* CSS reset */
+*,
+*:before,
+*:after {
+  /* margin: 0; */
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-size: 1.25rem;
+  background-color: #2c3034;;
+}
+
+.containerLabel {
+  /* width: 500px;  */
+  background-color: #066a75;
+  text-align: center;
+  border-radius: 50px;
+  border-color: #066a75;
+  width: 500px;
+  text-align: center;
+}
+
+.newAccount {
+  font-size: 14px;
+  color: #48cad8;
+  margin-top: 10px;
+}
+
+/* remove a linha dos links */
+a {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* esconde as ancoras da tela */
+a.links {
+  display: none;
+}
+
+.containerLogin {
+  margin: 0;
+  text-align: center;
+  margin-top: 200px;
+  background-color: #066a75;
+}
+
+.content {
+  width: 500px;
+  min-height: 560px;
+  /* margin: 0px auto; */
+  position: relative;
+}
+
+h1 {
+  font-size: 30px;
+  color: #48cad8;
+  padding: 2px 0 10px 0;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /* text-align: center; */
+  padding-bottom: 30px;
+}
+
+
+
+p {
+  margin-bottom: 15px;
+}
+
+.content p:first-child {
+  /* margin: 0px; */
+}
+
+label {
+  color: #48cad8;
+  position: relative;
+}
+
+/* placeholder */
+::-webkit-input-placeholder {
+  color: #bebcbc;
+  font-style: italic;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #bebcbc;
+  font-style: italic;
+}
+
+input {
+  outline: none;
+}
+
+/*estilo dos input,  menos o checkbox */
+input:not([type="checkbox"]) {
+  width: 20%;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid #b2b2b2;
+
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+  box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+/* estilo do botão submit */
+button {
+  width: 18% !important;
+  cursor: pointer;
+  background: #48cad8;
+  padding: 8px 5px;
+  color: #fff;
+  font-size: 20px;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-shadow: 0 1px 1px #333;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  transition: all 0.2s linear;
+}
+
+a {
+  color: #fff;
+}
