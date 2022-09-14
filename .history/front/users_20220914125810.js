@@ -43,8 +43,8 @@ const listingUsers = () => {
                     trHTML += '<td>' + element.age + '</td>';
                     trHTML += '<td>' + element.sex + '</td>';
                     trHTML += '<td>' + element.email + '</td>';
-                    trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' + element.id + ')"><img src="/images/iconEdit.png"></button></td>';
-                    trHTML += '<button type="button" class="btn btn-outline-danger" onclick="userDelete(' + element.id + ')"><img src="/images/iconDelete.png"></button></td>';
+                    trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showUserEditBox(' + element.id + ')">Edit</button>';
+                    trHTML += '<button type="button" class="btn btn-outline-danger" onclick="userDelete(' + element.id + ')">Del</button></td>';
                     trHTML += "</tr>";
                 });
                     document.getElementById("mytable").innerHTML = trHTML;

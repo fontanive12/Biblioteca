@@ -177,8 +177,8 @@ const listingTitle = () => {
                     trHTML += '<td>' + element.publication_year + '</td>';
                     trHTML += '<td>' + element.pages + '</td>';
                     trHTML += '<td>' + element.value + '</td>';
-                    trHTML += '<td>' + element.Category.description + '</td>';
                     trHTML += '<td>' + element.Publisher.name + '</td>';
+                    trHTML += '<td>' + element.Category.description + '</td>';
                     trHTML += '<td>' + element.Format.description + '</td>';
 
                     trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showBookEditBox(' + element.id + ')"><img src="/images/edit.png"></button>';
@@ -211,8 +211,8 @@ const listingCategories = () => {
                     trHTML += '<td>' + element.author + '</td>';
                     trHTML += '<td>' + element.publication_year + '</td>';
                     trHTML += '<td>' + element.pages + '</td>';
-                    trHTML += '<td>' + element.Category.description + '</td>';
                     trHTML += '<td>' + element.Publisher.name + '</td>';
+                    trHTML += '<td>' + element.Category.description + '</td>';
                     trHTML += '<td>' + element.Format.description + '</td>';
 
                     trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showBookEditBox(' + element.id + ')"><img src="/images/edit.png"></button>';
