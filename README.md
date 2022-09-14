@@ -4,7 +4,7 @@
 
 <h3>1º Acesse: http://177.44.248.42/front/login.html</h3>
 
-<h3>2º Faça o login, pode-se usar de exemplo para entrar:
+<h3>2º Faça o login, pode-se usar como exemplo para entrar:
     <p>user: juca@gmail.com</p>
     <p>senha: 123</p>
 </h3>
