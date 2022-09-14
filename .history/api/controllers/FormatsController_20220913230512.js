@@ -63,7 +63,7 @@ class CategoriesController {
   }
 
   delete = async (req, res, next) => {
-    const category = await getCategory(id);
+    const category = await getFormat(id);
     const data = category.data;
     await CategoryModel.destroy(data,{
       where: {

@@ -29,11 +29,11 @@ class CategoriesController {
   create = async (req, res, next) => {
     try {
       const data = await this._validateData(req.body);
-      const category = await CategoryModel.create(data);
+      const format = await FormatModel.create(data);
       LogModel.create({
-        description: 'Category ' + category.description + ' created.',
+        description: 'Format ' + format.description + ' created.',
       });
-      res.json(category);
+      res.json(format);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

@@ -3,7 +3,7 @@ const CategoryModel = require('../models/Format');
 const axios = require('axios')
 
 const LogModel = require('../models/Log')
-class CategoriesController {
+class FormatModel {
 
   index = async (req, res, next) => {
     const params = req.query;
@@ -20,7 +20,7 @@ class CategoriesController {
       };
     }
 
-    const categories = await CategoryModel.findAll({
+    const categories = await FormatModel.findAll({
       where: where
     });
     res.json(categories);
@@ -29,18 +29,18 @@ class CategoriesController {
   create = async (req, res, next) => {
     try {
       const data = await this._validateData(req.body);
-      const category = await CategoryModel.create(data);
+      const format = await FormatModel.create(data);
       LogModel.create({
-        description: 'Category ' + category.description + ' created.',
+        description: 'Format ' + format.description + ' created.',
       });
-      res.json(category);
+      res.json(format);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 
   show = async (req, res, next) => {
-    const category = await CategoryModel.findByPk(req.params.categoryId);
+    const category = await FormatModel.findByPk(req.params.categoryId);
     res.json(category);
   }
 
@@ -48,7 +48,7 @@ class CategoriesController {
     try {
       const id = req.params.categoryId;
       const data = await this._validateData(req.body, id);
-      await CategoryModel.update(data, {
+      await FormatModel.update(data, {
         where: {
           id: id
         }
@@ -56,7 +56,7 @@ class CategoriesController {
       LogModel.create({
         description: 'Category ' + req.body.description + ' updated.',
       });
-      res.json(await CategoryModel.findByPk(id));
+      res.json(await FormatModel.findByPk(id));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -65,7 +65,7 @@ class CategoriesController {
   delete = async (req, res, next) => {
     const category = await getCategory(id);
     const data = category.data;
-    await CategoryModel.destroy(data,{
+    await FormatModel.destroy(data,{
       where: {
         id: req.params.categoryId
       }
@@ -102,7 +102,7 @@ class CategoriesController {
       where.id = { [Op.ne]: id }; // WHERE id != id
     }
 
-    const count = await CategoryModel.count({
+    const count = await FormatModel.count({
       where: where
     });
 
@@ -110,4 +110,4 @@ class CategoriesController {
   }
 }
 
-module.exports = new CategoriesController();
+module.exports = new FormatModel();
